@@ -1,4 +1,6 @@
+require 'laziness/api'
 require 'laziness/client'
+require 'laziness/user'
 
 module Slack
   class << self

@@ -1,3 +1,5 @@
+require 'webmock/rspec'
+
 require 'laziness'
 
 RSpec.configure do |config|
