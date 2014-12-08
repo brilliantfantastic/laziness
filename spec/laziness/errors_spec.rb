@@ -94,6 +94,16 @@ describe 'API errors' do
     expect { subject.channels.all }.to raise_error Slack::AlreadyArchivedError
   end
 
+  it 'raises a channel not archived error if the channel id is not archived' do
+    response = {
+      ok: false,
+      error: "not_archived"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::NotArchivedError
+  end
+
   it 'raises a general channel archived error if the channel is the general channel' do
     response = {
       ok: false,

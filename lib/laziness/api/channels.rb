@@ -15,6 +15,11 @@ module Slack
         request :post, access_token, 'channels.archive', channel: id
         nil
       end
+
+      def unarchive(id)
+        request :post, access_token, 'channels.unarchive', channel: id
+        nil
+      end
     end
   end
 end

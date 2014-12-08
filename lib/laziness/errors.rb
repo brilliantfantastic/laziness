@@ -65,6 +65,12 @@ module Slack
     end
   end
 
+  class NotArchivedError < APIError
+    def initialize
+      super "Channel is not archived."
+    end
+  end
+
   class CantArchiveGeneralError < APIError
     def initialize
       super "You cannot archive the general channel."

@@ -30,4 +30,13 @@ describe Slack::API:: Channels do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.unarchive' do
+    it 'marks the channel as unarchived' do
+      stub = stub_slack_request :post, "channels.unarchive?channel=C02BLAH&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.unarchive("C02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
