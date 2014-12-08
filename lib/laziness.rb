@@ -1,5 +1,6 @@
 require 'laziness/api'
 require 'laziness/client'
+require 'laziness/errors'
 require 'laziness/user'
 
 module Slack

@@ -37,7 +37,21 @@ module Slack
             "Content-Type" => "application/json; charset=utf-8"
           }
         }
-        HTTParty.send method, full_path, options
+        response = HTTParty.send method, full_path, options
+        handle_exceptions response
+        response
+      end
+
+      def handle_exceptions(response)
+        parsed = JSON.parse(response)
+        if !parsed['ok']
+          klass = "#{parsed['error'].gsub(/(^|_)(.)/) { $2.upcase }}Error"
+          if Slack.const_defined? klass
+            raise Slack.const_get(klass)
+          else
+            raise Slack::APIError.new parsed['error']
+          end
+        end
       end
     end
   end
