@@ -51,4 +51,14 @@ describe Slack::API::Users do
       expect(user.name).to eq "jimmy"
     end
   end
+
+  describe '.set_active' do
+    it 'marks the user as active' do
+      response = { ok: true }
+      stub = stub_request(:post, "https://slack.com/api/users.setActive?token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+      expect(subject.set_active).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end

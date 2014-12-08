@@ -17,6 +17,11 @@ module Slack
         Slack::User.parse response, 'user'
       end
 
+      def set_active
+        request :post, access_token, 'users.setActive'
+        nil
+      end
+
       private
 
       def base_path
