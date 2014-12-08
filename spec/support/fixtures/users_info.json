@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "user": {
+    "id": "U024BLAH",
+    "name": "jimmy",
+    "deleted": false,
+    "status": "null",
+    "real_name": "Jimmy Page"
+  }
+}

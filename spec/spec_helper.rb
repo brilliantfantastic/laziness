@@ -1,4 +1,5 @@
 require 'webmock/rspec'
+require 'support/slack_stub_factory'
 
 require 'laziness'
 
@@ -10,4 +11,6 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
+
+  config.include SlackStubFactory
 end

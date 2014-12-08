@@ -4,27 +4,8 @@ describe Slack::API::Users do
 
   describe '.all' do
     it 'returns all the users for an account' do
-      response = {
-        ok: true,
-        members: [
-          {
-            id: "U024BLAH",
-            name: "jimmy",
-            deleted: false,
-            status: nil,
-            real_name: "Jimmy Page"
-          },
-          {
-            id: "U024BLAH2",
-            name: "robert",
-            deleted: false,
-            status: nil,
-            real_name: "Robert Plant"
-          }
-        ]
-      }
-      stub_request(:get, "https://slack.com/api/users.list?token=#{access_token}").
-        to_return(status: 200, body: response.to_json)
+      stub_slack_request :get, "users.list?token=#{access_token}", 'users_list.json'
+
       users = subject.all
       expect(users.length).to eq 2
       expect(users[0].id).to eq "U024BLAH"
@@ -34,18 +15,8 @@ describe Slack::API::Users do
 
   describe '.find' do
     it 'returns the specific user with the specified id' do
-      response  = {
-        ok: true,
-        user: {
-          id: "U024BLAH",
-          name: "jimmy",
-          deleted: false,
-          status: nil,
-          real_name: "Jimmy Page"
-        }
-      }
-      stub_request(:get, "https://slack.com/api/users.info?token=#{access_token}&user=U024BLAH").
-        to_return(status: 200, body: response.to_json)
+      stub_slack_request :get, "users.info?user=U024BLAH&token=#{access_token}", 'users_info.json'
+
       user = subject.find("U024BLAH")
       expect(user.id).to eq "U024BLAH"
       expect(user.name).to eq "jimmy"
@@ -54,9 +25,8 @@ describe Slack::API::Users do
 
   describe '.set_active' do
     it 'marks the user as active' do
-      response = { ok: true }
-      stub = stub_request(:post, "https://slack.com/api/users.setActive?token=#{access_token}").
-        to_return(status: 200, body: response.to_json)
+      stub = stub_slack_request :post, "users.setActive?token=#{access_token}", 'successful_response.json'
+
       expect(subject.set_active).to be_nil
       expect(stub).to have_been_requested
     end

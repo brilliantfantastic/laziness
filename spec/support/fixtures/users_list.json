@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "members": [
+    {
+      "id": "U024BLAH",
+      "name": "jimmy",
+      "deleted": false,
+      "status": "null",
+      "real_name": "Jimmy Page"
+    },
+    {
+      "id": "U024BLAH2",
+      "name": "robert",
+      "deleted": false,
+      "status": "null",
+      "real_name": "Robert Plant"
+    }
+  ]
+}
