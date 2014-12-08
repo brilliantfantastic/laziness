@@ -5,5 +5,9 @@ module Slack
     def initialize(access_token)
       @access_token = access_token
     end
+
+    def users
+      @users ||= Slack::API::Users.new(access_token)
+    end
   end
 end
