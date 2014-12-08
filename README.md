@@ -68,7 +68,7 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 ```
 client.users.all # lists out all the users
 client.users.find(user_id) # get info about a specific user
-client.users.set_active! # sets the current user (defined by the access_token) as active
+client.users.set_active # sets the current user (defined by the access_token) as active
 ```
 
 ## CONTRIBUTING
