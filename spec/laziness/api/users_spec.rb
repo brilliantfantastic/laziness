@@ -6,7 +6,7 @@ describe Slack::API::Users do
     it 'returns all the users for an account' do
       response = {
         ok: true,
-        messages: [
+        members: [
           {
             id: "U024BLAH",
             name: "jimmy",
@@ -27,6 +27,8 @@ describe Slack::API::Users do
         to_return(status: 200, body: response.to_json)
       users = subject.all
       expect(users.length).to eq 2
+      expect(users[0].id).to eq "U024BLAH"
+      expect(users[1].id).to eq "U024BLAH2"
     end
   end
 end

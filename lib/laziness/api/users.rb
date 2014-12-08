@@ -9,7 +9,7 @@ module Slack
 
       def all
         response = request :get, access_token, 'users.list'
-        Slack::User.parse response
+        Slack::User.parse response, 'members'
       end
 
       private
