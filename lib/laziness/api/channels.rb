@@ -10,6 +10,11 @@ module Slack
         response = request :get, access_token, 'channels.info', channel: id
         Slack::Channel.parse response, 'channel'
       end
+
+      def archive(id)
+        request :post, access_token, 'channels.archive', channel: id
+        nil
+      end
     end
   end
 end

@@ -21,4 +21,13 @@ describe Slack::API:: Channels do
       expect(channel.name).to eq "tour"
     end
   end
+
+  describe '.archive' do
+    it 'marks the channel as archived' do
+      stub = stub_slack_request :post, "channels.archive?channel=C02BLAH&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.archive("C02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
