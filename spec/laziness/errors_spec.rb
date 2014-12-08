@@ -54,6 +54,76 @@ describe 'API errors' do
     expect { subject.users.all }.to raise_error Slack::UserNotVisibleError
   end
 
+  it 'raises a user is bot error if the user is a bot user' do
+    response = {
+      ok: false,
+      error: "user_is_bot"
+    }
+    stub_request(:get, "https://slack.com/api/users.list?token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.users.all }.to raise_error Slack::UserIsBotError
+  end
+
+  it 'raises a user is restricted error if the user is not allowed to perform the action' do
+    response = {
+      ok: false,
+      error: "user_is_restricted"
+    }
+    stub_request(:get, "https://slack.com/api/users.list?token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.users.all }.to raise_error Slack::UserIsRestrictedError
+  end
+
+  it 'raises a channel not found error if the channel id was invalid' do
+    response = {
+      ok: false,
+      error: "channel_not_found"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::ChannelNotFoundError
+  end
+
+  it 'raises a channel already archived error if the channel id was already archived' do
+    response = {
+      ok: false,
+      error: "already_archived"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::AlreadyArchivedError
+  end
+
+  it 'raises a general channel archived error if the channel is the general channel' do
+    response = {
+      ok: false,
+      error: "cant_archive_general"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::CantArchiveGeneralError
+  end
+
+  it 'raises a last restricted account error if the channel is restricted' do
+    response = {
+      ok: false,
+      error: "last_ra_channel"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::LastRaChannelError
+  end
+
+  it 'raises a restricted action error if the user does not have the correct permissions' do
+    response = {
+      ok: false,
+      error: "restricted_action"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::RestrictedActionError
+  end
+
   it 'raises an http error if the error is not known' do
     response = {
       ok: false,
