@@ -11,4 +11,14 @@ describe Slack::API:: Channels do
       expect(channels[0].id).to eq "C02BLAH"
     end
   end
+
+  describe '.find' do
+    it 'returns the specific channel with the specified id' do
+      stub_slack_request :get, "channels.info?channel=C02BLAH&token=#{access_token}", 'channels_info.json'
+
+      channel = subject.find("C02BLAH")
+      expect(channel.id).to eq "C02BLAH"
+      expect(channel.name).to eq "tour"
+    end
+  end
 end

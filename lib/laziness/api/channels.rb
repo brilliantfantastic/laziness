@@ -5,6 +5,11 @@ module Slack
         response = request :get, access_token, 'channels.list', exclude_archived: exclude_archived ? 1 : 0
         Slack::Channel.parse response, 'channels'
       end
+
+      def find(id)
+        response = request :get, access_token, 'channels.info', channel: id
+        Slack::Channel.parse response, 'channel'
+      end
     end
   end
 end
