@@ -1,4 +1,6 @@
 require 'laziness/api'
+require 'laziness/base'
+require 'laziness/channel'
 require 'laziness/client'
 require 'laziness/errors'
 require 'laziness/user'

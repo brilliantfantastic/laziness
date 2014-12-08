@@ -1,4 +1,4 @@
 module Slack
-  class User < Base
+  class Channel < Base
   end
 end
