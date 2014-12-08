@@ -34,7 +34,7 @@ describe Slack::API:: Channels do
           }
         ]
       }
-      stub_request(:get, "https://slack.com/api/channels.list?token=#{access_token}").
+      stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
         to_return(status: 200, body: response.to_json)
       channels = subject.all
       expect(channels.length).to eq 1
