@@ -31,4 +31,24 @@ describe Slack::API::Users do
       expect(users[1].id).to eq "U024BLAH2"
     end
   end
+
+  describe '.find' do
+    it 'returns the specific user with the specified id' do
+      response  = {
+        ok: true,
+        user: {
+          id: "U024BLAH",
+          name: "jimmy",
+          deleted: false,
+          status: nil,
+          real_name: "Jimmy Page"
+        }
+      }
+      stub_request(:get, "https://slack.com/api/users.info?token=#{access_token}&user=U024BLAH").
+        to_return(status: 200, body: response.to_json)
+      user = subject.find("U024BLAH")
+      expect(user.id).to eq "U024BLAH"
+      expect(user.name).to eq "jimmy"
+    end
+  end
 end

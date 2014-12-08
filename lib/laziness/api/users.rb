@@ -12,14 +12,20 @@ module Slack
         Slack::User.parse response, 'members'
       end
 
+      def find(id)
+        response = request :get, access_token, 'users.info', user: id
+        Slack::User.parse response, 'user'
+      end
+
       private
 
       def base_path
         "https://slack.com/api/"
       end
 
-      def request(method, access_token, path)
+      def request(method, access_token, path, arguments={})
         full_path = "#{base_path}#{path}?token=#{access_token}"
+        arguments.each_pair { |key, value| full_path = "#{full_path}&#{key}=#{value}" }
         options = {
           headers: {
             "Accept"       => "application/json",

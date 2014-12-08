@@ -6,7 +6,7 @@ module Slack
       def parse(request, key=nil)
         parsed = JSON.parse(request)
         parsed = parsed[key] if key && parsed[key]
-        if parsed.is_a? Enumerable
+        if parsed.is_a? Array
           users = []
           parsed.each { |user| users << new(user) }
           users
