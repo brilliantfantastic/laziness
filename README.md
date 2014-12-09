@@ -45,6 +45,18 @@ client.channels.history(channel_id, latest: DateTime.now, oldest: 2.weeks.ago, c
 client.channels.invite(channel_id, user_id) # invites the specific user to the specific channel
 ```
 
+#### TODO:
+
+- [ ] [channels.history](https://api.slack.com/methods/channels.history)
+- [ ] [channels.invite](https://api.slack.com/methods/channels.invite)
+- [ ] [channels.join](https://api.slack.com/methods/channels.join)
+- [ ] [channels.kick](https://api.slack.com/methods/channels.kick)
+- [ ] [channels.leave](https://api.slack.com/methods/channels.leave)
+- [ ] [channels.mark](https://api.slack.com/methods/channels.mark)
+- [ ] [channels.rename](https://api.slack.com/methods/channels.rename)
+- [ ] [channels.setPurpose](https://api.slack.com/methods/channels.setPurpose)
+- [ ] [channels.setTopic](https://api.slack.com/methods/channels.setTopic)
+
 ### Chat
 
 ### Emoji
