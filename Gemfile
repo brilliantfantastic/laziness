@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.1.4'
 
-gem 'httparty'
-gem 'hashie'
+gemspec
 
 group :development, :test do
   gem 'rspec'

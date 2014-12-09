@@ -1,3 +1,10 @@
+PATH
+  remote: .
+  specs:
+    laziness (0.1.0)
+      hashie
+      httparty
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -32,7 +39,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  hashie
-  httparty
+  laziness!
   rspec
   webmock

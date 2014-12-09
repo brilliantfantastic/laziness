@@ -1,3 +1,4 @@
+require 'laziness/version'
 require 'laziness/api'
 require 'laziness/base'
 require 'laziness/channel'
