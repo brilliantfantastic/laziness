@@ -1,0 +1,9 @@
+## MAC OS
+.DS_Store
+
+## RUBYGEMS
+*.gem
+.bundle
+vendor/bundle
+
+tmp
