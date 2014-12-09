@@ -71,6 +71,18 @@ module Slack
     end
   end
 
+  class NameTakenError < APIError
+    def initialize
+      super "A channel cannot be created with the given name."
+    end
+  end
+
+  class NoChannelError < APIError
+    def initialize
+      super "Value passed for name was empty."
+    end
+  end
+
   class CantArchiveGeneralError < APIError
     def initialize
       super "You cannot archive the general channel."

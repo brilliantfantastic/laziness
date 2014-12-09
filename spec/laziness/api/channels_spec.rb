@@ -22,6 +22,16 @@ describe Slack::API:: Channels do
     end
   end
 
+  describe '.create' do
+    it 'creates a new channel and returns the specified channel' do
+      stub_slack_request :post, "channels.create?name=tour&token=#{access_token}", 'channels_info.json'
+
+      channel = subject.create("tour")
+      expect(channel.id).to eq "C02BLAH"
+      expect(channel.name).to eq "tour"
+    end
+  end
+
   describe '.archive' do
     it 'marks the channel as archived' do
       stub = stub_slack_request :post, "channels.archive?channel=C02BLAH&token=#{access_token}", 'successful_response.json'

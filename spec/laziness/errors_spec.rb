@@ -134,6 +134,26 @@ describe 'API errors' do
     expect { subject.channels.all }.to raise_error Slack::RestrictedActionError
   end
 
+  it 'raises a name taken error if the channel name already exists' do
+    response = {
+      ok: false,
+      error: "name_taken"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::NameTakenError
+  end
+
+  it 'raises a no channel error if the channel name was not provided' do
+    response = {
+      ok: false,
+      error: "no_channel"
+    }
+    stub_request(:get, "https://slack.com/api/channels.list?exclude_archived=0&token=#{access_token}").
+        to_return(status: 200, body: response.to_json)
+    expect { subject.channels.all }.to raise_error Slack::NoChannelError
+  end
+
   it 'raises an http error if the error is not known' do
     response = {
       ok: false,
