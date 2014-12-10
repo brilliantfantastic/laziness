@@ -91,3 +91,9 @@ client.users.set_active # sets the current user (defined by the access_token) as
 1. Commit your changes (small commits please)
 1. Push your new branch `git push origin my-awesome-feature`
 1. Create a pull request `hub pull-request -b brilliantfantastic:master -h brilliantfantastic:my-awesome-feature`
+
+## PUSHING A NEW GEM
+
+1. Bump the VERSION in `lib/laziness/version.rb`
+1. Commit changes and push to GitHub
+1. run `bundle exec rake release`
