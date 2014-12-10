@@ -28,7 +28,7 @@ module Slack
       end
 
       def handle_exceptions(response)
-        parsed = JSON.parse(response)
+        parsed = JSON.parse(response.body)
         if !parsed['ok']
           klass = "#{parsed['error'].gsub(/(^|_)(.)/) { $2.upcase }}Error"
           if Slack.const_defined? klass
