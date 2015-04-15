@@ -67,7 +67,9 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 
 ### IM
 
-### OAuth
+### Auth
+
+client.auth.test # get info about a specific oauth token
 
 ### Presence
 
