@@ -21,6 +21,15 @@ describe Slack::API::Groups do
     end
   end
 
+  describe '.close' do
+    it 'closes the group' do
+      stub = stub_slack_request :post, "groups.close?channel=G02BLAH&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.close("G02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
+
   describe '.create' do
     it 'creates a new group and returns the specified group' do
       stub_slack_request :post, "groups.create?name=music&token=#{access_token}", 'groups_info.json'

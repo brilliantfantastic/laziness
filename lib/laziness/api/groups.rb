@@ -11,6 +11,11 @@ module Slack
         nil
       end
 
+      def close(id)
+        request :post, access_token, 'groups.close', channel: id
+        nil
+      end
+
       def create(name)
         response = request :post, access_token, 'groups.create', name: name
         Slack::Group.parse response, 'group'

@@ -70,6 +70,7 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 client.groups.all # lists out all the groups
 client.groups.find(group_id) # get info about a specific group
 client.groups.archive(group_id) # archives the specific group
+client.groups.close(group_id) # closes the specific group
 client.groups.unarchive(group_id) # unarchives the specific group
 
 group = Slack::Group.new(name: "testing")
@@ -78,7 +79,6 @@ client.groups.create(group) # creates the new group
 
 #### TODO:
 
-- [ ] [groups.close](https://api.slack.com/methods/groups.close)
 - [ ] [groups.createChild](https://api.slack.com/methods/groups.createChild)
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)
 - [ ] [groups.invite](https://api.slack.com/methods/groups.invite)
