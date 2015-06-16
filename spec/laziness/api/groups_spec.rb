@@ -11,4 +11,14 @@ describe Slack::API::Groups do
       expect(groups[0].id).to eq "G02BLAH"
     end
   end
+
+  describe '.find' do
+    it 'returns the specific group with the specified id' do
+      stub_slack_request :get, "groups.info?channel=G02BLAH&token=#{access_token}", 'groups_info.json'
+
+      group = subject.find("G02BLAH")
+      expect(group.id).to eq "G02BLAH"
+      expect(group.name).to eq "music"
+    end
+  end
 end

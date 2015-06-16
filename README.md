@@ -67,6 +67,7 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 
 ```
 client.groups.all # lists out all the groups
+client.groups.find(group_id) # get info about a specific group
 ```
 
 #### TODO:
@@ -76,7 +77,6 @@ client.groups.all # lists out all the groups
 - [ ] [groups.create](https://api.slack.com/methods/groups.create)
 - [ ] [groups.createChild](https://api.slack.com/methods/groups.createChild)
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)
-- [ ] [groups.info](https://api.slack.com/methods/groups.info)
 - [ ] [groups.invite](https://api.slack.com/methods/groups.invite)
 - [ ] [groups.kick](https://api.slack.com/methods/groups.kick)
 - [ ] [groups.leave](https://api.slack.com/methods/groups.leave)
