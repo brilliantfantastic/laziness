@@ -29,6 +29,11 @@ module Slack
         Slack::Group.parse response, 'group'
       end
 
+      def invite(id, user_id)
+        response = request :post, access_token, 'groups.invite', channel: id, user: user_id
+        Slack::Group.parse response, 'group'
+      end
+
       def unarchive(id)
         with_nil_response { request :post, access_token, 'groups.unarchive', channel: id }
       end

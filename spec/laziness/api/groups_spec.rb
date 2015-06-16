@@ -60,6 +60,16 @@ describe Slack::API::Groups do
     end
   end
 
+  describe '.invite' do
+    it 'returns the specific group with the specified id' do
+      stub_slack_request :post, "groups.invite?channel=G02BLAH&user=U024BLAH&token=#{access_token}", 'groups_info.json'
+
+      group = subject.invite("G02BLAH", "U024BLAH")
+      expect(group.id).to eq "G02BLAH"
+      expect(group.name).to eq "music"
+    end
+  end
+
   describe '.unarchive' do
     it 'marks the group as unarchived' do
       stub = stub_slack_request :post, "groups.unarchive?channel=G02BLAH&token=#{access_token}", 'successful_response.json'
