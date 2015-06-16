@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "groups": [
+    {
+      "id": "G02BLAH",
+      "name": "music",
+      "is_group": true,
+      "created": 1403798029,
+      "creator": "U024BLAH",
+      "is_archived": false,
+      "members": [
+          "U024BLAH",
+          "U024BLAH2"
+      ],
+      "topic": {
+          "value": "",
+          "creator": "",
+          "last_set": 0
+      },
+      "purpose": {
+          "value": "A place to discuss musical influences",
+          "creator": "U024BLAH",
+          "last_set": 1403798029
+      }
+    }
+  ]
+}

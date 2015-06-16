@@ -10,12 +10,16 @@ module Slack
       @auth ||= Slack::API::Auth.new(access_token)
     end
 
-    def users
-      @users ||= Slack::API::Users.new(access_token)
-    end
-
     def channels
       @channels ||= Slack::API::Channels.new(access_token)
+    end
+
+    def groups
+      @groups ||= Slack::API::Groups.new(access_token)
+    end
+
+    def users
+      @users ||= Slack::API::Users.new(access_token)
     end
   end
 end

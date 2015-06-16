@@ -13,9 +13,14 @@ module Slack
         "https://slack.com/api/"
       end
 
+      def with_nil_response
+        yield
+        nil
+      end
+
       def request(method, access_token, path, arguments={})
         full_path = "#{base_path}#{path}?token=#{access_token}"
-        arguments.each_pair { |key, value| full_path = "#{full_path}&#{key}=#{value}" }
+        arguments.each_pair { |key, value| full_path = "#{full_path}&#{key}=#{ERB::Util.url_encode(value)}" }
         options = {
           headers: {
             "Accept"       => "application/json",

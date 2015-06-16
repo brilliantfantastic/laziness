@@ -36,10 +36,10 @@ client = Slack.client(access_token: "your-access-token")
 ```
 client.channels.all # lists out all the channels
 client.channels.find(channel_id) # get info about a specific channel
-client.channels.archive!(channel_id) # archives the specific channel
+client.channels.archive(channel_id) # archives the specific channel
+client.channels.unarchive(channel_id) # unarchives the specific channel
 
-channel = Slack::Channel.new(name: "testing")
-client.channels.create(channel) # creates the new channel
+channel = client.channels.create("testing") # creates the new channel
 
 client.channels.history(channel_id, latest: DateTime.now, oldest: 2.weeks.ago, count: 1000) # lists out the messages for the specific channels
 client.channels.invite(channel_id, user_id) # invites the specific user to the specific channel
@@ -65,11 +65,36 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 
 ### Groups
 
+```
+client.groups.all # lists out all the groups
+client.groups.find(group_id) # get info about a specific group
+client.groups.archive(group_id) # archives the specific group
+client.groups.close(group_id) # closes the specific group
+client.groups.unarchive(group_id) # unarchives the specific group
+
+group = client.groups.create("testing") # creates the new group
+group = client.groups.copy(group_id) # archives the specified group and returns a copy
+group = client.groups.invite(group_id, user_id) # invites the specified user to the specified group and returns the group
+client.groups.kick(group_id, user_id) # removes the specified user from the specified group
+client.groups.leave(group_id) # removes the current user from the specified group
+client.groups.open(group_id) # opens the specified group
+client.groups.update_purpose(group_id, purpose) # updates the purpose for the specific group
+client.groups.update_topic(group_id, topic) # updates the topic for the specific group
+```
+
+#### TODO:
+
+- [ ] [groups.history](https://api.slack.com/methods/groups.history)
+- [ ] [groups.mark](https://api.slack.com/methods/groups.mark)
+- [ ] [groups.rename](https://api.slack.com/methods/groups.rename)
+
 ### IM
 
 ### Auth
 
+```
 client.auth.test # get info about a specific oauth token
+```
 
 ### Presence
 
