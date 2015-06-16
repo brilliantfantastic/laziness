@@ -7,8 +7,7 @@ module Slack
       end
 
       def archive(id)
-        request :post, access_token, 'channels.archive', channel: id
-        nil
+        with_nil_response { request :post, access_token, 'channels.archive', channel: id }
       end
 
       def create(name)
@@ -22,8 +21,7 @@ module Slack
       end
 
       def unarchive(id)
-        request :post, access_token, 'channels.unarchive', channel: id
-        nil
+        with_nil_response { request :post, access_token, 'channels.unarchive', channel: id }
       end
     end
   end

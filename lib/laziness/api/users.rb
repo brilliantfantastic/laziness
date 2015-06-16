@@ -12,8 +12,7 @@ module Slack
       end
 
       def set_active
-        request :post, access_token, 'users.setActive'
-        nil
+        with_nil_response { request :post, access_token, 'users.setActive' }
       end
     end
   end

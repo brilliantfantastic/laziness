@@ -7,13 +7,11 @@ module Slack
       end
 
       def archive(id)
-        request :post, access_token, 'groups.archive', channel: id
-        nil
+        with_nil_response { request :post, access_token, 'groups.archive', channel: id }
       end
 
       def close(id)
-        request :post, access_token, 'groups.close', channel: id
-        nil
+        with_nil_response { request :post, access_token, 'groups.close', channel: id }
       end
 
       def copy(id)
@@ -32,8 +30,7 @@ module Slack
       end
 
       def unarchive(id)
-        request :post, access_token, 'groups.unarchive', channel: id
-        nil
+        with_nil_response { request :post, access_token, 'groups.unarchive', channel: id }
       end
     end
   end
