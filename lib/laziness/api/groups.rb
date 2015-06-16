@@ -49,6 +49,10 @@ module Slack
       def unarchive(id)
         with_nil_response { request :post, access_token, 'groups.unarchive', channel: id }
       end
+
+      def update_purpose(id, purpose)
+        with_nil_response { request :post, access_token, 'groups.setPurpose', channel: id, purpose: purpose }
+      end
     end
   end
 end

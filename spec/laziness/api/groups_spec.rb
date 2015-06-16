@@ -105,4 +105,13 @@ describe Slack::API::Groups do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.update_purpose' do
+    it 'updates the groups purpose' do
+      stub = stub_slack_request :post, "groups.setPurpose?channel=G02BLAH&purpose=This%20is%20a%20new%20purpose&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.update_purpose("G02BLAH", "This is a new purpose")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
