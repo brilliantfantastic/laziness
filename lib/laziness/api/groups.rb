@@ -38,6 +38,10 @@ module Slack
         with_nil_response { request :post, access_token, 'groups.kick', channel: id, user: user_id }
       end
 
+      def leave(id)
+        with_nil_response { request :post, access_token, 'groups.leave', channel: id }
+      end
+
       def unarchive(id)
         with_nil_response { request :post, access_token, 'groups.unarchive', channel: id }
       end

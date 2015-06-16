@@ -76,12 +76,12 @@ group = client.groups.create("testing") # creates the new group
 group = client.groups.copy(group_id) # archives the specified group and returns a copy
 group = client.groups.invite(group_id, user_id) # invites the specified user to the specified group and returns the group
 client.groups.kick(group_id, user_id) # removes the specified user from the specified group
+client.groups.leave(group_id) # removes the current user from the specified group
 ```
 
 #### TODO:
 
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)
-- [ ] [groups.leave](https://api.slack.com/methods/groups.leave)
 - [ ] [groups.mark](https://api.slack.com/methods/groups.mark)
 - [ ] [groups.open](https://api.slack.com/methods/groups.open)
 - [ ] [groups.rename](https://api.slack.com/methods/groups.rename)
