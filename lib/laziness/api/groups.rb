@@ -53,6 +53,10 @@ module Slack
       def update_purpose(id, purpose)
         with_nil_response { request :post, access_token, 'groups.setPurpose', channel: id, purpose: purpose }
       end
+
+      def update_topic(id, topic)
+        with_nil_response { request :post, access_token, 'groups.setTopic', channel: id, topic: topic }
+      end
     end
   end
 end

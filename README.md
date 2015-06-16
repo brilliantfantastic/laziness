@@ -79,6 +79,7 @@ client.groups.kick(group_id, user_id) # removes the specified user from the spec
 client.groups.leave(group_id) # removes the current user from the specified group
 client.groups.open(group_id) # opens the specified group
 client.groups.update_purpose(group_id, purpose) # updates the purpose for the specific group
+client.groups.update_topic(group_id, topic) # updates the topic for the specific group
 ```
 
 #### TODO:
@@ -86,7 +87,6 @@ client.groups.update_purpose(group_id, purpose) # updates the purpose for the sp
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)
 - [ ] [groups.mark](https://api.slack.com/methods/groups.mark)
 - [ ] [groups.rename](https://api.slack.com/methods/groups.rename)
-- [ ] [groups.setTopic](https://api.slack.com/methods/groups.setTopic)
 
 ### IM
 

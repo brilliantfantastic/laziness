@@ -114,4 +114,13 @@ describe Slack::API::Groups do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.update_topic' do
+    it 'updates the groups topic' do
+      stub = stub_slack_request :post, "groups.setTopic?channel=G02BLAH&topic=This%20is%20a%20new%20topic&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.update_topic("G02BLAH", "This is a new topic")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
