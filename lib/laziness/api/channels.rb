@@ -6,9 +6,9 @@ module Slack
         Slack::Channel.parse response, 'channels'
       end
 
-      def find(id)
-        response = request :get, access_token, 'channels.info', channel: id
-        Slack::Channel.parse response, 'channel'
+      def archive(id)
+        request :post, access_token, 'channels.archive', channel: id
+        nil
       end
 
       def create(name)
@@ -16,9 +16,9 @@ module Slack
         Slack::Channel.parse response, 'channel'
       end
 
-      def archive(id)
-        request :post, access_token, 'channels.archive', channel: id
-        nil
+      def find(id)
+        response = request :get, access_token, 'channels.info', channel: id
+        Slack::Channel.parse response, 'channel'
       end
 
       def unarchive(id)

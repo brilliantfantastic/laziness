@@ -6,9 +6,9 @@ module Slack
         Slack::Group.parse response, 'groups'
       end
 
-      def find(id)
-        response = request :get, access_token, 'groups.info', channel: id
-        Slack::Group.parse response, 'group'
+      def archive(id)
+        request :post, access_token, 'groups.archive', channel: id
+        nil
       end
 
       def create(name)
@@ -16,9 +16,9 @@ module Slack
         Slack::Group.parse response, 'group'
       end
 
-      def archive(id)
-        request :post, access_token, 'groups.archive', channel: id
-        nil
+      def find(id)
+        response = request :get, access_token, 'groups.info', channel: id
+        Slack::Group.parse response, 'group'
       end
 
       def unarchive(id)
