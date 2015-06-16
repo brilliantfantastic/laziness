@@ -40,4 +40,13 @@ describe Slack::API::Groups do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.unarchive' do
+    it 'marks the group as unarchived' do
+      stub = stub_slack_request :post, "groups.unarchive?channel=G02BLAH&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.unarchive("G02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
