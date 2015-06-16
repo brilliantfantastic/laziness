@@ -12,13 +12,12 @@ describe Slack::API:: Channels do
     end
   end
 
-  describe '.find' do
-    it 'returns the specific channel with the specified id' do
-      stub_slack_request :get, "channels.info?channel=C02BLAH&token=#{access_token}", 'channels_info.json'
+  describe '.archive' do
+    it 'marks the channel as archived' do
+      stub = stub_slack_request :post, "channels.archive?channel=C02BLAH&token=#{access_token}", 'successful_response.json'
 
-      channel = subject.find("C02BLAH")
-      expect(channel.id).to eq "C02BLAH"
-      expect(channel.name).to eq "tour"
+      expect(subject.archive("C02BLAH")).to be_nil
+      expect(stub).to have_been_requested
     end
   end
 
@@ -32,12 +31,13 @@ describe Slack::API:: Channels do
     end
   end
 
-  describe '.archive' do
-    it 'marks the channel as archived' do
-      stub = stub_slack_request :post, "channels.archive?channel=C02BLAH&token=#{access_token}", 'successful_response.json'
+  describe '.find' do
+    it 'returns the specific channel with the specified id' do
+      stub_slack_request :get, "channels.info?channel=C02BLAH&token=#{access_token}", 'channels_info.json'
 
-      expect(subject.archive("C02BLAH")).to be_nil
-      expect(stub).to have_been_requested
+      channel = subject.find("C02BLAH")
+      expect(channel.id).to eq "C02BLAH"
+      expect(channel.name).to eq "tour"
     end
   end
 
