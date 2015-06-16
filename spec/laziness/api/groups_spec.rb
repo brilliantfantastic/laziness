@@ -21,4 +21,14 @@ describe Slack::API::Groups do
       expect(group.name).to eq "music"
     end
   end
+
+  describe '.create' do
+    it 'creates a new group and returns the specified group' do
+      stub_slack_request :post, "groups.create?name=music&token=#{access_token}", 'groups_info.json'
+
+      group = subject.create("music")
+      expect(group.id).to eq "G02BLAH"
+      expect(group.name).to eq "music"
+    end
+  end
 end
