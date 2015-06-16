@@ -16,6 +16,11 @@ module Slack
         nil
       end
 
+      def copy(id)
+        response = request :post, access_token, 'groups.createChild', channel: id
+        Slack::Group.parse response, 'group'
+      end
+
       def create(name)
         response = request :post, access_token, 'groups.create', name: name
         Slack::Group.parse response, 'group'

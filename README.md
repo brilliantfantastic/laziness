@@ -39,8 +39,7 @@ client.channels.find(channel_id) # get info about a specific channel
 client.channels.archive(channel_id) # archives the specific channel
 client.channels.unarchive(channel_id) # unarchives the specific channel
 
-channel = Slack::Channel.new(name: "testing")
-client.channels.create(channel) # creates the new channel
+channel = client.channels.create("testing") # creates the new channel
 
 client.channels.history(channel_id, latest: DateTime.now, oldest: 2.weeks.ago, count: 1000) # lists out the messages for the specific channels
 client.channels.invite(channel_id, user_id) # invites the specific user to the specific channel
@@ -73,13 +72,12 @@ client.groups.archive(group_id) # archives the specific group
 client.groups.close(group_id) # closes the specific group
 client.groups.unarchive(group_id) # unarchives the specific group
 
-group = Slack::Group.new(name: "testing")
-client.groups.create(group) # creates the new group
+group = client.groups.create("testing") # creates the new group
+group = client.groups.copy(group_id) # archives the specified group and returns a copy
 ```
 
 #### TODO:
 
-- [ ] [groups.createChild](https://api.slack.com/methods/groups.createChild)
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)
 - [ ] [groups.invite](https://api.slack.com/methods/groups.invite)
 - [ ] [groups.kick](https://api.slack.com/methods/groups.kick)

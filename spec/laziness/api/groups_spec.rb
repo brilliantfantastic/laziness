@@ -30,6 +30,16 @@ describe Slack::API::Groups do
     end
   end
 
+  describe '.copy' do
+    it 'creates a new group, archives the existing group, and returns the new group' do
+      stub_slack_request :post, "groups.createChild?channel=G02BLAH&token=#{access_token}", 'groups_info.json'
+
+      group = subject.copy("G02BLAH")
+      expect(group.id).to eq "G02BLAH"
+      expect(group.name).to eq "music"
+    end
+  end
+
   describe '.create' do
     it 'creates a new group and returns the specified group' do
       stub_slack_request :post, "groups.create?name=music&token=#{access_token}", 'groups_info.json'
