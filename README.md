@@ -36,7 +36,7 @@ client = Slack.client(access_token: "your-access-token")
 ```
 client.channels.all # lists out all the channels
 client.channels.find(channel_id) # get info about a specific channel
-client.channels.archive!(channel_id) # archives the specific channel
+client.channels.archive(channel_id) # archives the specific channel
 
 channel = Slack::Channel.new(name: "testing")
 client.channels.create(channel) # creates the new channel
@@ -68,6 +68,7 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 ```
 client.groups.all # lists out all the groups
 client.groups.find(group_id) # get info about a specific group
+client.channels.archive(channel_id) # archives the specific group
 
 group = Slack::Group.new(name: "testing")
 client.groups.create(group) # creates the new group
@@ -75,7 +76,6 @@ client.groups.create(group) # creates the new group
 
 #### TODO:
 
-- [ ] [groups.archive](https://api.slack.com/methods/groups.archive)
 - [ ] [groups.close](https://api.slack.com/methods/groups.close)
 - [ ] [groups.createChild](https://api.slack.com/methods/groups.createChild)
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)

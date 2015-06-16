@@ -15,6 +15,11 @@ module Slack
         response = request :post, access_token, 'groups.create', name: name
         Slack::Group.parse response, 'group'
       end
+
+      def archive(id)
+        request :post, access_token, 'groups.archive', channel: id
+        nil
+      end
     end
   end
 end

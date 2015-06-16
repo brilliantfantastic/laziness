@@ -31,4 +31,13 @@ describe Slack::API::Groups do
       expect(group.name).to eq "music"
     end
   end
+
+  describe '.archive' do
+    it 'marks the group as archived' do
+      stub = stub_slack_request :post, "groups.archive?channel=G02BLAH&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.archive("G02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
