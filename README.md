@@ -75,12 +75,12 @@ client.groups.unarchive(group_id) # unarchives the specific group
 group = client.groups.create("testing") # creates the new group
 group = client.groups.copy(group_id) # archives the specified group and returns a copy
 group = client.groups.invite(group_id, user_id) # invites the specified user to the specified group and returns the group
+client.groups.kick(group_id, user_id) # removes the specified user from the specified group
 ```
 
 #### TODO:
 
 - [ ] [groups.history](https://api.slack.com/methods/groups.history)
-- [ ] [groups.kick](https://api.slack.com/methods/groups.kick)
 - [ ] [groups.leave](https://api.slack.com/methods/groups.leave)
 - [ ] [groups.mark](https://api.slack.com/methods/groups.mark)
 - [ ] [groups.open](https://api.slack.com/methods/groups.open)

@@ -34,6 +34,10 @@ module Slack
         Slack::Group.parse response, 'group'
       end
 
+      def kick(id, user_id)
+        with_nil_response { request :post, access_token, 'groups.kick', channel: id, user: user_id }
+      end
+
       def unarchive(id)
         with_nil_response { request :post, access_token, 'groups.unarchive', channel: id }
       end

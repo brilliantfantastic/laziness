@@ -70,6 +70,15 @@ describe Slack::API::Groups do
     end
   end
 
+  describe '.kick' do
+    it 'removes the specified user from the specified group' do
+      stub = stub_slack_request :post, "groups.kick?channel=G02BLAH&user=U024BLAH&token=#{access_token}", 'successful_response.json'
+
+      expect(subject.kick("G02BLAH", "U024BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
+
   describe '.unarchive' do
     it 'marks the group as unarchived' do
       stub = stub_slack_request :post, "groups.unarchive?channel=G02BLAH&token=#{access_token}", 'successful_response.json'
