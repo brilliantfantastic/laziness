@@ -65,11 +65,35 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 
 ### Groups
 
+```
+client.groups.all # lists out all the groups
+```
+
+#### TODO:
+
+- [ ] [groups.archive](https://api.slack.com/methods/groups.archive)
+- [ ] [groups.close](https://api.slack.com/methods/groups.close)
+- [ ] [groups.create](https://api.slack.com/methods/groups.create)
+- [ ] [groups.createChild](https://api.slack.com/methods/groups.createChild)
+- [ ] [groups.history](https://api.slack.com/methods/groups.history)
+- [ ] [groups.info](https://api.slack.com/methods/groups.info)
+- [ ] [groups.invite](https://api.slack.com/methods/groups.invite)
+- [ ] [groups.kick](https://api.slack.com/methods/groups.kick)
+- [ ] [groups.leave](https://api.slack.com/methods/groups.leave)
+- [ ] [groups.mark](https://api.slack.com/methods/groups.mark)
+- [ ] [groups.open](https://api.slack.com/methods/groups.open)
+- [ ] [groups.rename](https://api.slack.com/methods/groups.rename)
+- [ ] [groups.setPurpose](https://api.slack.com/methods/groups.setPurpose)
+- [ ] [groups.setTopic](https://api.slack.com/methods/groups.setTopic)
+- [ ] [groups.unarchive](https://api.slack.com/methods/groups.unarchive)
+
 ### IM
 
 ### Auth
 
+```
 client.auth.test # get info about a specific oauth token
+```
 
 ### Presence
 
