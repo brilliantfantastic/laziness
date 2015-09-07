@@ -18,7 +18,7 @@ module Slack
         nil
       end
 
-      def request(method, access_token, path, arguments={})
+      def request(method, path, arguments={})
         full_path = "#{base_path}#{path}?token=#{access_token}"
         arguments.each_pair { |key, value| full_path = "#{full_path}&#{key}=#{ERB::Util.url_encode(value)}" }
         options = {
