@@ -6,6 +6,7 @@ require 'laziness/channel'
 require 'laziness/client'
 require 'laziness/errors'
 require 'laziness/group'
+require 'laziness/oauth'
 require 'laziness/user'
 
 module Slack
