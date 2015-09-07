@@ -2,7 +2,7 @@ module Slack
   class Client
     attr_reader :access_token
 
-    def initialize(access_token)
+    def initialize(access_token=nil)
       @access_token = access_token
     end
 
@@ -16,6 +16,10 @@ module Slack
 
     def groups
       @groups ||= Slack::API::Groups.new(access_token)
+    end
+
+    def oauth
+      @oauth ||= Slack::API::OAuth.new
     end
 
     def users
