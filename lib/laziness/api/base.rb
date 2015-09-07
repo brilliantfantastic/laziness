@@ -22,8 +22,10 @@ module Slack
         full_path = "#{base_path}#{path}"
         full_path = "#{full_path}?token=#{access_token}" unless access_token.nil?
         arguments.each_pair do |key, value|
-          seperator = full_path.include?("?") ? "&" : "?"
-          full_path = "#{full_path}#{seperator}#{key}=#{ERB::Util.url_encode(value)}"
+          unless value.nil?
+            seperator = full_path.include?("?") ? "&" : "?"
+            full_path = "#{full_path}#{seperator}#{key}=#{ERB::Util.url_encode(value)}"
+          end
         end
 
         options = {
