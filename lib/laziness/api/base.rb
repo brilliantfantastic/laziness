@@ -3,7 +3,7 @@ module Slack
     class Base
       attr_reader :access_token
 
-      def initialize(access_token)
+      def initialize(access_token=nil)
         @access_token = access_token
       end
 
@@ -19,8 +19,13 @@ module Slack
       end
 
       def request(method, path, arguments={})
-        full_path = "#{base_path}#{path}?token=#{access_token}"
-        arguments.each_pair { |key, value| full_path = "#{full_path}&#{key}=#{ERB::Util.url_encode(value)}" }
+        full_path = "#{base_path}#{path}"
+        full_path = "#{full_path}?token=#{access_token}" unless access_token.nil?
+        arguments.each_pair do |key, value|
+          seperator = full_path.include?("?") ? "&" : "?"
+          full_path = "#{full_path}#{seperator}#{key}=#{ERB::Util.url_encode(value)}"
+        end
+
         options = {
           headers: {
             "Accept"       => "application/json",
