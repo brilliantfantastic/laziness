@@ -96,6 +96,12 @@ client.groups.update_topic(group_id, topic) # updates the topic for the specific
 client.auth.test # get info about a specific oauth token
 ```
 
+### OAuth
+
+```
+client.oauth.access(client_id, client_secret, code, redirect_uri) # exchange api token for code
+```
+
 ### Presence
 
 ### Search
