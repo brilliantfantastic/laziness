@@ -128,6 +128,6 @@ client.users.set_active # sets the current user (defined by the access_token) as
 ## RELEASING A NEW GEM
 
 1. Bump the VERSION in `lib/laziness/version.rb`
-1. Commit changes and push to GitHub
 1. run `bundle exec rake build`
+1. Commit changes and push to GitHub
 1. run `bundle exec rake release`
