@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "access_token": "123456",
+  "scope": "incoming-webhook",
+  "team_name": "tour",
+  "incoming_webhook": {
+    "url": "https:\/\/tour.slack.com\/",
+    "channel": "#general",
+    "configuration_url": "https:\/\/hooks.slack.com\/services\/T1234\/1234\/"
+  }
+}
