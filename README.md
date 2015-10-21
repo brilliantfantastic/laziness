@@ -104,6 +104,12 @@ client.oauth.access(client_id, client_secret, code, redirect_uri) # exchange api
 
 ### Presence
 
+### RTM
+
+```
+client.rtm.start # get an rtm session back with a url for connecting
+```
+
 ### Search
 
 ### Stars
