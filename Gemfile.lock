@@ -2,8 +2,11 @@ PATH
   remote: .
   specs:
     laziness (0.1.5)
+      eventmachine
+      faye-websocket (>= 0.8.0)
       hashie
       httparty
+      multi_json
 
 GEM
   remote: https://rubygems.org/
@@ -12,11 +15,16 @@ GEM
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
+    eventmachine (1.0.8)
+    faye-websocket (0.10.0)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     hashie (3.4.2)
-    httparty (0.13.5)
+    httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     json (1.8.3)
+    multi_json (1.11.2)
     multi_xml (0.5.5)
     rake (10.3.2)
     rspec (3.1.0)
@@ -35,6 +43,9 @@ GEM
     webmock (1.18.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
+    websocket-driver (0.6.2)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
 
 PLATFORMS
   ruby
