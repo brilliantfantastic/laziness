@@ -15,6 +15,10 @@ module Slack
       @event_registry.register event, handler, func, &blk
     end
 
+    def unregister_event_handler(event=nil, handler=nil, func=:update, &blk)
+      @event_registry.unregister event, handler, func, &blk
+    end
+
     def run(queue=nil, options={})
       EM.run do
         connect(options)
@@ -34,6 +38,7 @@ module Slack
     def shutdown
       connection.close if connection
       EM.stop if EM.reactor_running?
+      @event_registry.clear
     end
 
     private

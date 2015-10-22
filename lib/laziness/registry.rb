@@ -6,6 +6,10 @@ module Slack
       @observers = []
     end
 
+    def clear
+      observers.clear
+    end
+
     def notify(topic)
       observers.select { |o| o.topic == topic }.map(&:execute)
     end

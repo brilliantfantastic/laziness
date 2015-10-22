@@ -28,8 +28,10 @@ describe Slack::Websocket do
       subject.register_event_handler :close do
         notified = true
       end
-      with_websocket(subject, queue)
-      expect(notified).to be_truthy
+      with_websocket(subject, queue) do |ws|
+        ws.close
+        expect(notified).to be_truthy
+      end
     end
   end
 
