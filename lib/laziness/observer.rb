@@ -10,9 +10,9 @@ module Slack
       @blk = blk
     end
 
-    def execute
-      blk.call if blk
-      observer.send func if observer && observer.respond_to?(func)
+    def execute(*args)
+      blk.call(*args) if blk
+      observer.send func, *args if observer && observer.respond_to?(func)
     end
 
     def ==(other)

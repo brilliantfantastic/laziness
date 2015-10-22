@@ -17,6 +17,26 @@ describe Slack::Observer do
       observer.execute
       expect(@executed).to be_truthy
     end
+
+    context "with arguments" do
+      it "calls the block" do
+        arguments = nil
+        observer = Slack::Observer.new do |argument1, argument2|
+          arguments = [argument1, argument2]
+        end.execute(:blah, :bleh)
+        expect(arguments).to eq [:blah, :bleh]
+      end
+
+      it "calls the method on the observer" do
+        @arguments = nil
+        def blah(argument)
+          @arguments = argument
+        end
+        observer = Slack::Observer.new nil, self, :blah
+        observer.execute :blah
+        expect(@arguments).to eq :blah
+      end
+    end
   end
 
   describe "#==" do
