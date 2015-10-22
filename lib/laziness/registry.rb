@@ -10,8 +10,8 @@ module Slack
       observers.clear
     end
 
-    def notify(topic)
-      observers.select { |o| o.topic == topic }.map(&:execute)
+    def notify(topic, *args)
+      observers.select { |o| o.topic == topic }.map { |o| o.execute(*args) }
     end
 
     def register(topic=nil, observer=nil, func=:update, &blk)
