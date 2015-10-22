@@ -6,7 +6,7 @@ describe Slack::Websocket do
   def with_websocket(subject, queue)
     thread = Thread.new { subject.run(queue, ping: nil) }
     thread.abort_on_exception = true
-    yield queue.pop
+    yield queue.pop if block_given?
     subject.shutdown
     thread.join
   end
@@ -23,9 +23,14 @@ describe Slack::Websocket do
       end
     end
 
-    xit "notifies a connect"
-    xit "notifies a disconnect"
-    xit "notifies an error"
+    it "notifies a close event" do
+      notified = false
+      subject.register_event_handler :close do
+        notified = true
+      end
+      with_websocket(subject, queue)
+      expect(notified).to be_truthy
+    end
   end
 
   describe "#message_received"
