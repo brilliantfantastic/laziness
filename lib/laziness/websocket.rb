@@ -23,13 +23,13 @@ module Slack
       EM.run do
         connect(options)
 
-        connection.on(:open) { |event| @event_registry.notify(:open) }
+        connection.on(:open) { |event| @event_registry.notify(:open, event) }
         connection.on(:message) { |event|  }
         connection.on(:close) do |event|
-          @event_registry.notify(:close)
+          @event_registry.notify(:close, event)
           shutdown
         end
-        connection.on(:error) { |event| @event_registry.notify(:error) }
+        connection.on(:error) { |event| @event_registry.notify(:error, event) }
 
         queue << connection if queue
       end
