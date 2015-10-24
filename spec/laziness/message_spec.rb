@@ -7,4 +7,13 @@ describe Slack::Message do
       expect(message.type).to eq :blah
     end
   end
+
+  describe "#generate" do
+    it "generates a new message with a random id and type" do
+      message = Slack::Message.generate text: "This is a test"
+      expect(message.id).to_not be_empty
+      expect(message.type).to eq :message
+      expect(message.text).to eq "This is a test"
+    end
+  end
 end

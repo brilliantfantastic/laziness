@@ -40,7 +40,24 @@ describe Slack::Websocket do
     end
   end
 
-  describe "#send_message"
+  describe "#broadcast" do
+    before do
+      allow(EM).to receive(:defer).and_yield
+      allow(SecureRandom).to receive(:random_number).and_return 123
+    end
+
+    it "sends a message to a channel" do
+      channel = "C12345"
+      payload = { id: "123", type: :message, channel: channel,
+                  text: "Would you like to play a game?" }
+      json = JSON.generate payload
+
+      with_websocket(subject, queue) do |ws|
+        expect(ws).to receive(:send).with json
+        subject.broadcast channel, "Would you like to play a game?"
+      end
+    end
+  end
 
   describe "#shutdown" do
     it "stops the event loop" do
