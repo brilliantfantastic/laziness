@@ -55,6 +55,8 @@ module Slack
     end
 
     def send_message(event)
+      message = Message.parse event.data
+      EM.defer { @events.notify(message.type, message) }
     end
   end
 end
