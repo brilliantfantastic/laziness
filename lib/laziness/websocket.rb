@@ -1,6 +1,5 @@
 require 'eventmachine'
 require 'faye/websocket'
-require 'multi_json'
 
 module Slack
   class Websocket
@@ -8,37 +7,38 @@ module Slack
 
     def initialize(session)
       @session = session
-      @event_registry = Registry.new
-    end
-
-    def register_event_handler(event=nil, handler=nil, func=:update, &blk)
-      @event_registry.register event, handler, func, &blk
-    end
-
-    def unregister_event_handler(event=nil, handler=nil, func=:update, &blk)
-      @event_registry.unregister event, handler, func, &blk
+      @events = Registry.new
     end
 
     def run(queue=nil, options={})
       EM.run do
         connect(options)
 
-        connection.on(:open) { |event| @event_registry.notify(:open, event) }
-        connection.on(:message) { |event|  }
+        connection.on(:open) { |event| EM.defer { @events.notify(:open, event) }}
+        connection.on(:message) { |event| send_message(event) }
         connection.on(:close) do |event|
-          @event_registry.notify(:close, event)
+          EM.defer { @events.notify(:close, event) }
           shutdown
         end
-        connection.on(:error) { |event| @event_registry.notify(:error, event) }
+        connection.on(:error) { |event| EM.defer { @events.notify(:error, event) }}
 
         queue << connection if queue
       end
     end
 
+    def on(event=nil, handler=nil, func=:update, &blk)
+      @events.register event, handler, func, &blk
+      self
+    end
+
+    def off(event=nil, handler=nil, func=:update, &blk)
+      @events.unregister event, handler, func, &blk
+    end
+
     def shutdown
       connection.close if connection
       EM.stop if EM.reactor_running?
-      @event_registry.clear
+      @events.clear
     end
 
     private
@@ -52,6 +52,9 @@ module Slack
 
     def default_options
       { ping: 10 }
+    end
+
+    def send_message(event)
     end
   end
 end

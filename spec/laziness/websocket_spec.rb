@@ -22,20 +22,32 @@ describe Slack::Websocket do
         expect(ws).to be_an_instance_of Faye::WebSocket::Client
       end
     end
+  end
 
-    it "notifies a close event" do
-      notified = false
-      subject.register_event_handler :close do
-        notified = true
-      end
-      with_websocket(subject, queue) do |ws|
-        ws.close
-        expect(notified).to be_truthy
-      end
+  describe "#on" do
+    it "registers an event handler" do
+      expect_any_instance_of(Slack::Registry).to \
+        receive(:register).with(:message, nil, :update).and_call_original
+      subject.on :message
     end
   end
 
-  describe "#message_received"
+  describe "#off" do
+    it "unregisters an event" do
+      expect_any_instance_of(Slack::Registry).to \
+        receive(:unregister).with(:open, nil, :update).and_call_original
+      subject.off :open
+    end
+  end
+
   describe "#send_message"
-  describe "#shutdown"
+
+  describe "#shutdown" do
+    it "stops the event loop" do
+      expect(EM).to receive(:stop).at_least(:once).and_call_original
+      with_websocket(subject, queue) do
+        subject.shutdown
+      end
+    end
+  end
 end
