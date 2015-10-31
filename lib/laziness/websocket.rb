@@ -10,8 +10,11 @@ module Slack
       @events = Registry.new
     end
 
-    def broadcast(channel, message)
-      EM.defer { connection.send Message.generate(channel: channel, text: message).to_json }
+    def broadcast(channel, message, options={})
+      EM.defer do
+        attributes = { channel: channel, text: message }.merge(options)
+        connection.send Message.generate(attributes).to_json
+      end
     end
 
     def run(queue=nil, options={})

@@ -9,7 +9,8 @@ module Slack
 
     class << self
       def generate(attributes)
-        new({ id: generate_id, type: :message }.merge attributes)
+        id = attributes.delete(:id) || generate_id
+        new({ id: id, type: :message }.merge attributes)
       end
 
       def generate_id

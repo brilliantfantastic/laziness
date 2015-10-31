@@ -15,5 +15,11 @@ describe Slack::Message do
       expect(message.type).to eq :message
       expect(message.text).to eq "This is a test"
     end
+
+    it "can have an id specified" do
+      expect(Slack::Message).to_not receive(:generate_id)
+      message = Slack::Message.generate id: 12345
+      expect(message.id).to eq 12345
+    end
   end
 end
