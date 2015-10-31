@@ -11,10 +11,8 @@ module Slack
     end
 
     def broadcast(channel, message, options={})
-      EM.defer do
-        attributes = { channel: channel, text: message }.merge(options)
-        connection.send Message.generate(attributes).to_json
-      end
+      attributes = { channel: channel, text: message }.merge(options)
+      connection.send Message.generate(attributes).to_json
     end
 
     def run(queue=nil, options={})
