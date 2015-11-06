@@ -9,10 +9,10 @@ require 'laziness/group'
 require 'laziness/message'
 require 'laziness/oauth'
 require 'laziness/observer'
+require 'laziness/real_time'
 require 'laziness/registry'
 require 'laziness/session'
 require 'laziness/user'
-require 'laziness/websocket'
 
 module Slack
   class << self
