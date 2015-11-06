@@ -25,7 +25,11 @@ Or install it yourself:
 gem install laziness
 ```
 
-## USAGE
+## WEB API USAGE
+
+The [Slack Web API](https://api.slack.com/web) is made up of HTTP RPC-style methods that allow you to communicate with Slack as yourself via an access token.
+
+You start by creating a `Client` with the access token you want to use. You can make calls to each [type](https://api.slack.com/types) using the [methods](https://api.slack.com/methods).
 
 ```
 client = Slack.client(access_token: "your-access-token")
@@ -104,6 +108,12 @@ client.oauth.access(client_id, client_secret, code, redirect_uri) # exchange api
 
 ### Presence
 
+### RTM
+
+```
+client.rtm.start # get an rtm session back with a url for connecting
+```
+
 ### Search
 
 ### Stars
@@ -114,6 +124,37 @@ client.oauth.access(client_id, client_secret, code, redirect_uri) # exchange api
 client.users.all # lists out all the users
 client.users.find(user_id) # get info about a specific user
 client.users.set_active # sets the current user (defined by the access_token) as active
+```
+
+## REAL TIME API USAGE
+
+The [Slack Real Time Messaging API](https://api.slack.com/rtm) is made up of Websocket events that allow you to communicate with Slack as a bot (or yourself) with an access token.
+
+You start by creating a `Client` with the access token you want to use (bot or otherwise) and call the `rtm.start` method which will return the websocket url to use. You can make wait for [events](https://api.slack.com/events) and respond to those directly.
+
+```
+client = Slack::Client.new bot_access_token
+session = client.rtm.start
+
+# Create a websocket for the session
+ws = Slack::RealTime.new(session)
+
+# Respond to open, close, and error events
+ws.on(:error) { |event| print "ERROR OCCURRED (@ #{Time.now}): #{event.inspect}\n" }
+ws.on(:close) { |event| print "CLOSED! (@ #{Time.now}): #{event.inspect}\n" }
+
+# Respond to Slack events
+ws.on(:message) do |data|
+  print "RECEIVED MESSAGE (@ #{Time.now}): #{data.inspect}\n"
+  # Message was placed in the Slack channel
+end
+ws.on(:channel_left) do |data|
+  print "SOMEONE LEFT (@ #{Time.now}): #{data.inspect}\n"
+end
+#...
+
+# Run the websocket as a client
+ws.run
 ```
 
 ## CONTRIBUTING
