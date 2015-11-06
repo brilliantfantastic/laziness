@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    laziness (0.1.5)
+    laziness (0.1.6)
       eventmachine
       faye-websocket (>= 0.8.0)
       hashie
@@ -18,7 +18,7 @@ GEM
     faye-websocket (0.10.0)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
-    hashie (3.4.2)
+    hashie (3.4.3)
     httparty (0.13.7)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
