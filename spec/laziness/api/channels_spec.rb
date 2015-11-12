@@ -1,4 +1,4 @@
-describe Slack::API:: Channels do
+describe Slack::API::Channels do
   let(:access_token) { "12345" }
   subject { Slack::API::Channels.new access_token }
 

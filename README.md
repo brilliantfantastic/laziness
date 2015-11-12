@@ -63,6 +63,12 @@ client.channels.invite(channel_id, user_id) # invites the specific user to the s
 
 ### Chat
 
+```
+message = client.chat.create("Hello world", channel_id) # creates a new message
+message = client.chat.update("Hello again", channel_id, message.ts) # updates the message with the specified timestamp
+client.chat.delete(channel_id, message.ts) # deletes the message with the specified timestamp
+```
+
 ### Emoji
 
 ### Files

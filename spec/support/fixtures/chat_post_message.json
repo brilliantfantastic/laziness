@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "channel": "C02BLAH",
+  "message": {
+    "text": "Hello world",
+    "username": "bot_user",
+    "type": "message"
+  }
+}
