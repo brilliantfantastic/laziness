@@ -16,7 +16,7 @@ describe Slack::API::Chat do
     it 'deletes a chat message' do
       stub = stub_slack_request :post, "chat.delete?channel=C02BLAH&ts=1447299140.000002&token=#{access_token}", 'chat_delete.json'
 
-      expect(subject.delete("1447299140.000002", "C02BLAH")).to be_nil
+      expect(subject.delete("C02BLAH", "1447299140.000002")).to be_nil
       expect(stub).to have_been_requested
     end
   end

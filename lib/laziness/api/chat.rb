@@ -6,7 +6,7 @@ module Slack
         Slack::Chat.parse response, 'message'
       end
 
-      def delete(timestamp, channel)
+      def delete(channel, timestamp)
         with_nil_response { request :post, 'chat.delete', ts: timestamp, channel: channel }
       end
 
