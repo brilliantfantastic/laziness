@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "channel": "C02BLAH",
+  "message": {
+    "text": "Hello again",
+    "ts": "1447299140.000002",
+    "username": "bot_user",
+    "type": "message"
+  }
+}

@@ -20,4 +20,14 @@ describe Slack::API::Chat do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.update' do
+    it 'updates a chat message and returns the updated message' do
+      stub_slack_request :post, "chat.update?channel=C02BLAH&ts=1447299140.000002&text=Hello%20again&token=#{access_token}", 'chat_update.json'
+
+      message = subject.update("Hello again", "C02BLAH", "1447299140.000002")
+      expect(message.text).to eq "Hello again"
+      expect(message.ts).to eq "1447299140.000002"
+    end
+  end
 end

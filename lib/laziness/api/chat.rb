@@ -9,6 +9,12 @@ module Slack
       def delete(timestamp, channel)
         with_nil_response { request :post, 'chat.delete', ts: timestamp, channel: channel }
       end
+
+      def update(text, channel, timestamp, options={})
+        response = request :post, 'chat.update',
+          { text: text, channel: channel, ts: timestamp }.merge(options)
+        Slack::Chat.parse response, 'message'
+      end
     end
   end
 end
