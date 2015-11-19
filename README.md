@@ -100,6 +100,21 @@ client.groups.update_topic(group_id, topic) # updates the topic for the specific
 
 ### IM
 
+```
+client.im.all # lists all the direct message channels available for your account
+client.im.open # opens a direct message channel with a specific user
+client.im.close # closes a direct message channel
+client.im.mark # specifies where the channel's messages were last read
+```
+
+#### TODO:
+
+- [ ] [im.history](https://api.slack.com/methods/im.history)
+
+### MPIM
+
+### API
+
 ### Auth
 
 ```
@@ -112,7 +127,9 @@ client.auth.test # get info about a specific oauth token
 client.oauth.access(client_id, client_secret, code, redirect_uri) # exchange api token for code
 ```
 
-### Presence
+### Pins
+
+### Reactions
 
 ### RTM
 
@@ -123,6 +140,8 @@ client.rtm.start # get an rtm session back with a url for connecting
 ### Search
 
 ### Stars
+
+### Teams
 
 ### Users
 
