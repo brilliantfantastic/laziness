@@ -19,9 +19,6 @@ describe Slack::API::IM do
     end
   end
 
-  describe ".history" do
-  end
-
   describe ".mark" do
     it "moves the read cursor to the specified timestamp in a direct message channel" do
       stub = stub_slack_request :post, "im.mark?channel=D02BLAH&ts=1234567890.123456&token=#{access_token}", "im_mark.json"
