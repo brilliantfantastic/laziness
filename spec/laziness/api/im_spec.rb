@@ -20,5 +20,10 @@ describe Slack::API::IM do
   end
 
   describe ".open" do
+    it "opens a direct message channel and returns the channel information" do
+      stub = stub_slack_request :post, "im.open?user=D024BLAH&token=#{access_token}", "im_open.json"
+      channel = subject.open("D024BLAH")
+      expect(channel.id).to eq "D02BLAH"
+    end
   end
 end
