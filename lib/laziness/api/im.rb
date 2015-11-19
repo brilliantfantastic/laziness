@@ -1,6 +1,11 @@
 module Slack
   module API
     class IM < Base
+      def all
+        response = request :get, 'im.list'
+        Slack::Channel.parse response, 'ims'
+      end
+
       def close(channel)
         with_nil_response { request :post, 'im.close', channel: channel }
       end
