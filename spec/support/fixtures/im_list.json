@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "ims": [
+    {
+      "id": "D02BLAH",
+      "is_im": true,
+      "user": "U024BLAH",
+      "created": 1372105335,
+      "is_user_deleted": false
+    }
+  ]
+}
