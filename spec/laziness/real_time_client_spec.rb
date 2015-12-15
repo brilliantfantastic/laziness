@@ -1,7 +1,7 @@
-describe Slack::RealTime do
+describe Slack::RealTimeClient do
   let(:session) { double(:session, url: "wss://example.com") }
   let(:queue) { Queue.new }
-  subject { Slack::RealTime.new(session) }
+  subject { Slack::RealTimeClient.new(session) }
 
   def with_websocket(subject, queue)
     thread = Thread.new { subject.run(queue, ping: nil) }
@@ -13,7 +13,7 @@ describe Slack::RealTime do
 
   it "accepts a session" do
     session = double(:session)
-    expect(Slack::RealTime.new(session).session).to eq session
+    expect(Slack::RealTimeClient.new(session).session).to eq session
   end
 
   describe "#run" do

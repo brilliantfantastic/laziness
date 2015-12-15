@@ -2,7 +2,7 @@ require 'eventmachine'
 require 'faye/websocket'
 
 module Slack
-  class RealTime
+  class RealTimeClient
     attr_reader :session
 
     def initialize(session)
