@@ -162,7 +162,7 @@ client = Slack::Client.new bot_access_token
 session = client.rtm.start
 
 # Create a websocket for the session
-ws = Slack::RealTime.new(session)
+ws = Slack::RealTimeClient.new(session)
 
 # Respond to open, close, and error events
 ws.on(:error) { |event| print "ERROR OCCURRED (@ #{Time.now}): #{event.inspect}\n" }
