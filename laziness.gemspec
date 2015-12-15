@@ -5,7 +5,7 @@ require 'laziness/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "laziness"
-  spec.version       = Slack::VERSION
+  spec.version       = Laziness::VERSION
   spec.authors       = ["Jamie Wright"]
   spec.email         = ["jamie@brilliantfantastic.com"]
   spec.summary       = "A Slack API wrapper written in Ruby."
