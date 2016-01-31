@@ -2,6 +2,11 @@ module Slack
   module API
     class Chat < Base
       def create(text, channel, options={})
+        if (options.has_key?(:attachments))
+          attachments = options[:attachments]
+          attachments = JSON.dump(attachments) unless attachments.is_a?(String)
+          options = options.merge(attachments: attachments)
+        end
         response = request :post, 'chat.postMessage', { text: text, channel: channel }.merge(options)
         Slack::Chat.parse response, 'message'
       end
