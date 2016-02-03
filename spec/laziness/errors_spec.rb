@@ -1,6 +1,6 @@
 describe 'API errors' do
   let(:access_token) { "12345" }
-  subject { Slack::Client.new access_token }
+  subject { Slack::WebClient.new access_token }
 
   # user_not_visible - The requested user is not visible to the calling user
 

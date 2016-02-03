@@ -1,5 +1,5 @@
 module Slack
-  class Client
+  class WebClient
     attr_reader :access_token
 
     def initialize(access_token=nil)

@@ -4,7 +4,7 @@ require 'laziness/base'
 require 'laziness/auth'
 require 'laziness/channel'
 require 'laziness/chat'
-require 'laziness/client'
+require 'laziness/web_client'
 require 'laziness/errors'
 require 'laziness/group'
 require 'laziness/message'
@@ -18,7 +18,7 @@ require 'laziness/user'
 module Slack
   class << self
     def web_client(attributes={})
-      Slack::Client.new(attributes[:access_token])
+      Slack::WebClient.new(attributes[:access_token])
     end
   end
 end
