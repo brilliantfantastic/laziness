@@ -99,7 +99,10 @@ Style/SingleLineMethods:
   Enabled: false
   AllowIfMethodIsEmpty: true
 Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
+  Description: Use a space around equals in parameter defaults
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#spaces-around-equals
+  Enabled: true
+  EnforcedStyle: no_space
 Style/StringLiterals:
   Description: Checks if uses of quotes match the configured preference.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-string-literals
