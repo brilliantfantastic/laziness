@@ -17,7 +17,7 @@ require 'laziness/user'
 
 module Slack
   class << self
-    def client(attributes={})
+    def web_client(attributes={})
       Slack::Client.new(attributes[:access_token])
     end
   end

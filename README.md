@@ -32,7 +32,7 @@ The [Slack Web API](https://api.slack.com/web) is made up of HTTP RPC-style meth
 You start by creating a `Client` with the access token you want to use. You can make calls to each [type](https://api.slack.com/types) using the [methods](https://api.slack.com/methods).
 
 ```
-client = Slack.client(access_token: "your-access-token")
+client = Slack.web_client(access_token: "your-access-token")
 ```
 
 ### Channels
