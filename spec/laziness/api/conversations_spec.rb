@@ -74,4 +74,16 @@ describe Slack::API::Conversations do
       expect(conversation.name).to eq "tour"
     end
   end
+
+  describe '.join' do
+    it 'joins the current user to the specific channel' do
+      stub_slack_request :post,
+        "conversations.join?channel=C02BLAH&token=#{access_token}",
+        'conversations_info.json'
+
+      conversation = subject.join("C02BLAH")
+      expect(conversation.id).to eq "C02BLAH"
+      expect(conversation.name).to eq "tour"
+    end
+  end
 end

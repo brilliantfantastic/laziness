@@ -41,6 +41,14 @@ module Slack
 
         Slack::Conversation.parse response, 'channel'
       end
+
+      def join(id)
+        response = request :post,
+          'conversations.join',
+          channel: id
+
+        Slack::Conversation.parse response, 'channel'
+      end
     end
   end
 end
