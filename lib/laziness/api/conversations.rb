@@ -57,6 +57,14 @@ module Slack
       def leave(id)
         with_nil_response { request :post, 'conversations.leave', channel: id }
       end
+
+      def members(id)
+        response = request :get,
+          'conversations.members',
+          channel: id
+
+        JSON.parse(response)["members"]
+      end
     end
   end
 end

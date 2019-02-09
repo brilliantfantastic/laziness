@@ -108,4 +108,15 @@ describe Slack::API::Conversations do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.members' do
+    it 'returns all the users from a channel' do
+      stub = stub_slack_request :get,
+        "conversations.members?channel=C02BLAH&token=#{access_token}",
+        'conversations_members.json'
+
+      members = subject.members("C02BLAH")
+      expect(members).to eq ["U024BLAH", "U024BLAH2"]
+    end
+  end
 end
