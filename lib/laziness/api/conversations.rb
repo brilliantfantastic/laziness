@@ -53,6 +53,10 @@ module Slack
       def kick(id, user)
         with_nil_response { request :post, 'conversations.kick', channel: id, user: user }
       end
+
+      def leave(id)
+        with_nil_response { request :post, 'conversations.leave', channel: id }
+      end
     end
   end
 end

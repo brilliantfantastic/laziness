@@ -97,4 +97,15 @@ describe Slack::API::Conversations do
       expect(stub).to have_been_requested
     end
   end
+
+  describe '.leave' do
+    it 'removes the current user from a channel' do
+      stub = stub_slack_request :post,
+        "conversations.leave?channel=G01BLAH&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.leave("G01BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end
