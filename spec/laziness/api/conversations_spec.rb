@@ -15,6 +15,17 @@ describe Slack::API::Conversations do
     end
   end
 
+  describe '.archive' do
+    it 'marks the channel as archived' do
+      stub = stub_slack_request :post,
+        "conversations.archive?channel=C02BLAH&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.archive("C02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
+
   describe '.find' do
     it 'returns the specific channel with the specified id' do
       stub_slack_request :get,
