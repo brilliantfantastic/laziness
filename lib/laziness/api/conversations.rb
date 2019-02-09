@@ -85,6 +85,15 @@ module Slack
         Slack::Conversation.parse response, 'channel'
       end
 
+      def set_purpose(id, purpose)
+        with_nil_response do
+          request :post,
+          'conversations.setPurpose',
+          channel: id,
+          purpose: purpose
+        end
+      end
+
       def unarchive(id)
         with_nil_response { request :post, 'conversations.unarchive', channel: id }
       end

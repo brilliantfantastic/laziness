@@ -143,6 +143,17 @@ describe Slack::API::Conversations do
     end
   end
 
+  describe '.set_purpose' do
+    it 'sets the purpose for a channel' do
+      stub = stub_slack_request :post,
+        "conversations.setPurpose?channel=G01BLAH&purpose=new%20purpose&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.set_purpose("G01BLAH", "new purpose")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
+
   describe '.unarchive' do
     it 'marks the channel as unarchived' do
       stub = stub_slack_request :post,
