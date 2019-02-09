@@ -94,6 +94,15 @@ module Slack
         end
       end
 
+      def set_topic(id, topic)
+        with_nil_response do
+          request :post,
+          'conversations.setTopic',
+          channel: id,
+          topic: topic
+        end
+      end
+
       def unarchive(id)
         with_nil_response { request :post, 'conversations.unarchive', channel: id }
       end

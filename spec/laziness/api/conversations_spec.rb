@@ -154,6 +154,17 @@ describe Slack::API::Conversations do
     end
   end
 
+  describe '.set_topic' do
+    it 'sets the topic for a channel' do
+      stub = stub_slack_request :post,
+        "conversations.setTopic?channel=G01BLAH&topic=new%20topic&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.set_topic("G01BLAH", "new topic")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
+
   describe '.unarchive' do
     it 'marks the channel as unarchived' do
       stub = stub_slack_request :post,
