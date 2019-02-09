@@ -9,6 +9,11 @@ module Slack
 
         Slack::Conversation.parse response, 'channels'
       end
+
+      def find(id)
+        response = request :get, 'conversations.info', channel: id
+        Slack::Conversation.parse response, 'channel'
+      end
     end
   end
 end
