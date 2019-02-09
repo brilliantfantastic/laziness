@@ -75,6 +75,15 @@ module Slack
 
         Slack::Conversation.parse response, 'channel'
       end
+
+      def rename(id, name)
+        response = request :post,
+          'conversations.rename',
+          channel: id,
+          name: name
+
+        Slack::Conversation.parse response, 'channel'
+      end
     end
   end
 end

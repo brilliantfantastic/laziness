@@ -130,4 +130,16 @@ describe Slack::API::Conversations do
       expect(conversation.id).to eq "C02BLAH"
     end
   end
+
+  describe '.rename' do
+    it 'renames the channel' do
+      stub_slack_request :post,
+        "conversations.rename?channel=C02BLAH&name=tour&token=#{access_token}",
+        'conversations_info.json'
+
+      conversation = subject.rename("C02BLAH", "tour")
+      expect(conversation.id).to eq "C02BLAH"
+      expect(conversation.name).to eq "tour"
+    end
+  end
 end
