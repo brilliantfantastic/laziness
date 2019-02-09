@@ -119,4 +119,15 @@ describe Slack::API::Conversations do
       expect(members).to eq ["U024BLAH", "U024BLAH2"]
     end
   end
+
+  describe '.open' do
+    it 'opens a direct message channel' do
+      stub_slack_request :post,
+        "conversations.open?return_im=false&users=U024BLAH,U025BLAH&token=#{access_token}",
+        'conversations_info.json'
+
+      conversation = subject.open(["U024BLAH", "U025BLAH"])
+      expect(conversation.id).to eq "C02BLAH"
+    end
+  end
 end

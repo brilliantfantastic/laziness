@@ -65,6 +65,16 @@ module Slack
 
         JSON.parse(response)["members"]
       end
+
+      def open(users=[], id=nil, return_im: false)
+        response = request :post,
+          'conversations.open',
+          channel: id,
+          users: (users || []).join(","),
+          return_im: return_im
+
+        Slack::Conversation.parse response, 'channel'
+      end
     end
   end
 end
