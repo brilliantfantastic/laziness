@@ -86,4 +86,15 @@ describe Slack::API::Conversations do
       expect(conversation.name).to eq "tour"
     end
   end
+
+  describe '.kick' do
+    it 'removes a user from a channel' do
+      stub = stub_slack_request :post,
+        "conversations.kick?channel=G01BLAH&user=U024BLAH&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.kick("G01BLAH", "U024BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end

@@ -49,6 +49,10 @@ module Slack
 
         Slack::Conversation.parse response, 'channel'
       end
+
+      def kick(id, user)
+        with_nil_response { request :post, 'conversations.kick', channel: id, user: user }
+      end
     end
   end
 end
