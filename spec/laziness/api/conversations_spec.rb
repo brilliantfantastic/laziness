@@ -142,4 +142,15 @@ describe Slack::API::Conversations do
       expect(conversation.name).to eq "tour"
     end
   end
+
+  describe '.unarchive' do
+    it 'marks the channel as unarchived' do
+      stub = stub_slack_request :post,
+        "conversations.unarchive?channel=C02BLAH&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.unarchive("C02BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
 end

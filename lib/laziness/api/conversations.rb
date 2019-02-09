@@ -84,6 +84,10 @@ module Slack
 
         Slack::Conversation.parse response, 'channel'
       end
+
+      def unarchive(id)
+        with_nil_response { request :post, 'conversations.unarchive', channel: id }
+      end
     end
   end
 end
