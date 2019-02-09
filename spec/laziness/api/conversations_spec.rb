@@ -26,6 +26,17 @@ describe Slack::API::Conversations do
     end
   end
 
+  describe '.close' do
+    it 'closes a direct message channel' do
+      stub = stub_slack_request :post,
+        "conversations.close?channel=G01BLAH&token=#{access_token}",
+        'successful_response.json'
+
+      expect(subject.close("G01BLAH")).to be_nil
+      expect(stub).to have_been_requested
+    end
+  end
+
   describe '.find' do
     it 'returns the specific channel with the specified id' do
       stub_slack_request :get,
