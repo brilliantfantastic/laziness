@@ -37,6 +37,19 @@ describe Slack::API::Conversations do
     end
   end
 
+  describe '.create' do
+    it 'creates a new channel and returns the specified channel' do
+      stub_slack_request :post,
+        "conversations.create?name=tour&is_private=false&"\
+        "user_ids=[]&token=#{access_token}",
+        'conversations_info.json'
+
+      conversation = subject.create("tour")
+      expect(conversation.id).to eq "C02BLAH"
+      expect(conversation.name).to eq "tour"
+    end
+  end
+
   describe '.find' do
     it 'returns the specific channel with the specified id' do
       stub_slack_request :get,

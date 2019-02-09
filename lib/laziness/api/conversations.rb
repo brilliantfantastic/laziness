@@ -18,6 +18,16 @@ module Slack
         with_nil_response { request :post, 'conversations.close', channel: id }
       end
 
+      def create(name, is_private=false, user_ids=[])
+        response = request :post,
+          'conversations.create',
+          name: name,
+          is_private: is_private,
+          user_ids: user_ids
+
+        Slack::Conversation.parse response, 'channel'
+      end
+
       def find(id)
         response = request :get, 'conversations.info', channel: id
         Slack::Conversation.parse response, 'channel'
