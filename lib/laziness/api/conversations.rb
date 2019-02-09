@@ -32,6 +32,15 @@ module Slack
         response = request :get, 'conversations.info', channel: id
         Slack::Conversation.parse response, 'channel'
       end
+
+      def invite(id, users)
+        response = request :post,
+          'conversations.invite',
+          channel: id,
+          users: users.join(",")
+
+        Slack::Conversation.parse response, 'channel'
+      end
     end
   end
 end

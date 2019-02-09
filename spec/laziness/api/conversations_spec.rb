@@ -61,4 +61,17 @@ describe Slack::API::Conversations do
       expect(conversation.name).to eq "tour"
     end
   end
+
+  describe '.invite' do
+    it 'invites users to a channel and returns the specified channel' do
+      stub_slack_request :post,
+        "conversations.invite?channel=tour&"\
+        "users=U024BLAH,U025BLAH&token=#{access_token}",
+        'conversations_info.json'
+
+      conversation = subject.invite("tour", ["U024BLAH", "U025BLAH"])
+      expect(conversation.id).to eq "C02BLAH"
+      expect(conversation.name).to eq "tour"
+    end
+  end
 end
