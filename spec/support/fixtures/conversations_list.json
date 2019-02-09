@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "channels": [
+    {
+      "id": "C02BLAH",
+      "name": "tour",
+      "is_channel": true,
+      "created": 1403798029,
+      "creator": "U024BLAH",
+      "is_archived": false,
+      "is_general": false,
+      "is_member": true,
+      "members": [
+          "U024BLAH",
+          "U024BLAH2"
+      ],
+      "topic": {
+          "value": "",
+          "creator": "",
+          "last_set": 0
+      },
+      "purpose": {
+          "value": "A place to discuss the upcoming tour",
+          "creator": "U024BLAH",
+          "last_set": 1403798029
+      },
+      "num_members": 2
+    }
+  ]
+}
