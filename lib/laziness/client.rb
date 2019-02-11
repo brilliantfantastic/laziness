@@ -18,6 +18,10 @@ module Slack
       @chat ||= Slack::API::Chat.new(access_token)
     end
 
+    def conversations
+      @conversations ||= Slack::API::Conversations.new(access_token)
+    end
+
     def im
       @im ||= Slack::API::IM.new(access_token)
     end
