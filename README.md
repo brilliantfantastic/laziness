@@ -69,6 +69,33 @@ message = client.chat.update("Hello again", channel_id, message.ts) # updates th
 client.chat.delete(channel_id, message.ts) # deletes the message with the specified timestamp
 ```
 
+### Conversations
+
+```
+client.conversations.all # lists out all the channels
+client.conversations.find(channel_id) # get info about a specific channel
+client.conversations.archive(channel_id) # archives the specific channel
+client.conversations.close(channel_id) # closes the specific channel
+client.conversations.join(channel_id) # joins the specific channel
+client.conversations.kick(channel_id, user) # removes the specific user from the specific channel
+client.conversations.leave(channel_id) # removes the current user from the specific channel
+client.conversations.members(channel_id) # returns all the members on a specific channel
+client.conversations.open(users, channel_id) # opens the channel with the specific users
+client.conversations.rename(channel_id, name) # renames the specific channel
+client.conversations.set_purpose(channel_id, purpose) # sets the purpose on the specific channel
+client.conversations.set_topic(channel_id, topic) # sets the topic on the specific channel
+client.conversations.unarchive(channel_id) # unarchives the specific channel
+
+channel = client.conversations.create("testing") # creates the new channel
+
+client.conversations.invite(channel_id, users) # invites the specific users to the specific channel
+```
+
+#### TODO:
+
+- [ ] [conversations.history](https://api.slack.com/methods/conversations.history)
+- [ ] [conversations.replies](https://api.slack.com/methods/conversations.replies)
+
 ### Emoji
 
 ### Files

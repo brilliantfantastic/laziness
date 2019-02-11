@@ -63,7 +63,7 @@ module Slack
           'conversations.members',
           channel: id
 
-        JSON.parse(response)["members"]
+        JSON.parse(response.body)["members"]
       end
 
       def open(users=[], id=nil, return_im: false)
