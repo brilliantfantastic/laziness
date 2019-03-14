@@ -178,6 +178,20 @@ client.users.find(user_id) # get info about a specific user
 client.users.set_active # sets the current user (defined by the access_token) as active
 ```
 
+### Pagination
+
+In order to support paging, you can provide a `page` parameter to all methods that support paging. If the `page` parameter exists, the method will map until all conversations are retrieved.
+
+```
+conversations = client.conversations.all(page: { limit: 10, sleep: 2, max_retries: 20 })
+```
+
+If you want to limit the number of page retrievals, you can set the `page` parameter to the number of retrievals to retrieve. For example, if you just want to retrieve one page worth of 1000 results, you can do the following:
+
+```
+conversations = client.conversations.all(page: { limit: 1000, page: 1 })
+```
+
 ## REAL TIME API USAGE
 
 The [Slack Real Time Messaging API](https://api.slack.com/rtm) is made up of Websocket events that allow you to communicate with Slack as a bot (or yourself) with an access token.
