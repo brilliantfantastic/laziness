@@ -2,12 +2,9 @@ module Slack
   class Cursor
     attr_reader :page
 
-    def initialize(page, &blk)
+    def initialize(page)
       @page = page
-      paginate(&blk)
     end
-
-    private
 
     def paginate(&blk)
       blk.call(Pager.new(page)) if block_given?

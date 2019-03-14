@@ -5,18 +5,26 @@ describe Slack::Cursor do
     it 'initializes with page attributes' do
       expect(described_class.new(page).page).to eq page
     end
+  end
+
+  describe '#paginate' do
+    let(:page) { { limit: 10 } }
+
+    subject { described_class.new(page) }
 
     it 'does not require a block' do
-      expect { described_class.new(page) }.to_not raise_error
+      expect { subject.paginate }.to_not raise_error
     end
 
     it 'yields a pager' do
-      expect { |b| described_class.new(page, &b) }.to yield_with_args(Slack::Pager)
+      expect { |b| subject.paginate(&b) }.to yield_with_args(Slack::Pager)
     end
 
     context 'with a nil page' do
-      it 'yields an empty pager' do
-        described_class.new(nil) do |pager|
+      subject { described_class.new(nil) }
+
+      it 'yields with an empty pager' do
+        subject.paginate do |pager|
           expect(pager).to be_empty
         end
       end
