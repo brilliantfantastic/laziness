@@ -10,7 +10,7 @@ module Slack
     private
 
     def paginate(&blk)
-      blk.call(Pager.new) if block_given?
+      blk.call(Pager.new(page)) if block_given?
     end
   end
 end
