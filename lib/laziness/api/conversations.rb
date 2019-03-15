@@ -61,12 +61,17 @@ module Slack
         with_nil_response { request :post, 'conversations.leave', channel: id }
       end
 
-      def members(id)
-        response = request :get,
-          'conversations.members',
-          channel: id
+      def members(id, page: nil)
+        responses = with_paging(page) do |pager|
+          request :get,
+                  'conversations.members',
+                  channel: id,
+                  **pager.to_h
+        end
 
-        JSON.parse(response.body)["members"]
+        responses.map do |response|
+          JSON.parse(response.body)["members"]
+        end.flatten
       end
 
       def open(users=[], id=nil, return_im: false)
