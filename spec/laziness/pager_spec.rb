@@ -42,4 +42,19 @@ describe Slack::Pager do
       expect(subject.to_h).to eq({ limit: 200, cursor: nil })
     end
   end
+
+  describe "#next" do
+    subject { described_class.new({ limit: 200 }) }
+
+    it "returns a new instance of the pager" do
+      pager = subject.next("next")
+
+      expect(pager).to be_instance_of(described_class)
+      expect(pager).to_not equal subject
+    end
+
+    it "sets the cursor" do
+      expect(subject.next("next").cursor).to eq "next"
+    end
+  end
 end

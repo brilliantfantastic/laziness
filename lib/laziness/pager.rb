@@ -16,5 +16,17 @@ module Slack
     def to_h
       { cursor: cursor, limit: limit }
     end
+
+    def next(cursor)
+      self.class.new(page).tap do |pager|
+        pager.cursor = cursor
+      end
+    end
+
+    protected
+
+    def cursor=(cursor)
+      @cursor = cursor
+    end
   end
 end
