@@ -1,9 +1,15 @@
 module Slack
   module API
     class Groups < Base
-      def all(exclude_archived=false)
-        response = request :get, 'groups.list', exclude_archived: exclude_archived ? 1 : 0
-        Slack::Group.parse response, 'groups'
+      def all(exclude_archived=false, page: nil)
+        responses = with_paging(page) do |pager|
+          request :get,
+                  'groups.list',
+                  exclude_archived: exclude_archived ? 1 : 0,
+                  **pager.to_h
+        end
+
+        Slack::Group.parse_all responses, 'groups'
       end
 
       def archive(id)
