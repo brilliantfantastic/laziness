@@ -1,9 +1,12 @@
 module Slack
   module API
     class Users < Base
-      def all
-        response = request :get, 'users.list'
-        Slack::User.parse response, 'members'
+      def all(page: nil)
+        responses = with_paging(page) do |pager|
+          request :get, 'users.list', **pager.to_h
+        end
+
+        Slack::User.parse_all responses, 'members'
       end
 
       def find(id)
