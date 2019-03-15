@@ -73,12 +73,30 @@ describe Slack::Cursor do
     end
 
     context 'with a too many requests error' do
-      context 'without a max retries' do
-        xit 'bubbles up the error'
+      let(:page) { { limit: 10, max_retries: 2 } }
+      let(:response) { OpenStruct.new(headers: { 'retry-after' => '0' }) }
+
+      it 'tries again when there is a max retries setting' do
+        number_of_tries = 0
+
+        expect {
+          subject.paginate do |pager|
+            number_of_tries += 1
+            raise Slack::TooManyRequestsError, response
+          end
+        }.to raise_error(Slack::TooManyRequestsError)
+
+        expect(number_of_tries).to eq 3
       end
 
-      context 'with the max retries reached' do
-        xit 'bubbles up the error'
+      context 'without a max retries' do
+        it 'bubbles up the error' do
+          expect do
+            subject.paginate do |pager|
+              raise Slack::TooManyRequestsError, response
+            end
+          end.to raise_error Slack::TooManyRequestsError
+        end
       end
     end
 

@@ -4,14 +4,28 @@ module Slack
 
     def initialize(page)
       @page = page
+      @max_retries = (page && page[:max_retries]) || 0
     end
 
     def paginate(&blk)
       responses = []
+
       if block_given?
         pager = Pager.new(page)
+        retries = 0
+
         loop do
-          response = blk.call(pager)
+          begin
+            response = blk.call(pager)
+          rescue Slack::TooManyRequestsError => e
+            raise e if retries >= max_retries
+
+            retries += 1
+
+            sleep(e.retry_after_in_seconds)
+            next
+          end
+
           responses << response
 
           break unless has_cursor?(response)
@@ -19,10 +33,13 @@ module Slack
           pager = pager.next(next_cursor(response))
         end
       end
+
       responses
     end
 
     private
+
+    attr_reader :max_retries
 
     def next_cursor(response)
       response["response_metadata"]["next_cursor"] unless !has_cursor?(response)
