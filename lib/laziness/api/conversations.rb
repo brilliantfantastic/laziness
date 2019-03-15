@@ -1,13 +1,16 @@
 module Slack
   module API
     class Conversations < Base
-      def all(exclude_archived=false, types='public_channel')
-        response = request :get,
-          'conversations.list',
-          exclude_archived: exclude_archived ? 1 : 0,
-          types: types
+      def all(exclude_archived=false, types='public_channel', page: nil)
+        responses = with_paging(page) do |pager|
+          request :get,
+            'conversations.list',
+            exclude_archived: exclude_archived ? 1 : 0,
+            types: types,
+            **pager.to_h
+        end
 
-        Slack::Conversation.parse response, 'channels'
+        Slack::Conversation.parse_all responses, 'channels'
       end
 
       def archive(id)
