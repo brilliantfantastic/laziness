@@ -18,6 +18,12 @@ module Slack
         nil
       end
 
+      def with_paging(page)
+        Cursor.new(page).paginate do |pager|
+          yield(pager)
+        end
+      end
+
       def request(method, path, arguments={})
         full_path = "#{base_path}#{path}"
         full_path = "#{full_path}?token=#{access_token}" unless access_token.nil?
@@ -45,6 +51,8 @@ module Slack
           klass = "#{parsed['error'].gsub(/(^|_)(.)/) { $2.upcase }}Error"
           if Slack.const_defined? klass
             raise Slack.const_get(klass)
+          elsif response.code == 429
+            raise Slack::TooManyRequestsError.new(response)
           else
             raise Slack::APIError.new parsed['error']
           end
