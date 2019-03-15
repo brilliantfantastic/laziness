@@ -5,6 +5,7 @@ module Slack
     def initialize(page)
       @page = page
       @max_retries = (page && page[:max_retries]) || 0
+      @sleep_interval = (page && page[:sleep_interval])
     end
 
     def paginate(&blk)
@@ -30,7 +31,11 @@ module Slack
 
           break unless has_cursor?(response)
 
+          retries = 0
+
           pager = pager.next(next_cursor(response))
+
+          sleep(sleep_interval) if sleep_interval
         end
       end
 
@@ -39,7 +44,7 @@ module Slack
 
     private
 
-    attr_reader :max_retries
+    attr_reader :max_retries, :sleep_interval
 
     def next_cursor(response)
       response["response_metadata"]["next_cursor"] unless !has_cursor?(response)

@@ -100,6 +100,19 @@ describe Slack::Cursor do
       end
     end
 
+    context 'with a sleep interval' do
+      let(:page) { { limit: 10, sleep_interval: 2 } }
+
+      it 'sleeps in between requests' do
+        expect(subject).to receive(:sleep).with(2)
+
+        responses = [second_response, last_response]
+        subject.paginate do |pager|
+          responses.shift
+        end
+      end
+    end
+
     context 'with a nil page' do
       subject { described_class.new(nil) }
 
