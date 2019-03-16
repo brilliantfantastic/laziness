@@ -53,7 +53,8 @@ module Slack
     def has_cursor?(response)
       response.respond_to?(:[]) &&
         !response["response_metadata"].nil? &&
-          !response["response_metadata"]["next_cursor"].nil?
+          !response["response_metadata"]["next_cursor"].nil? &&
+          !response["response_metadata"]["next_cursor"].empty?
     end
   end
 end

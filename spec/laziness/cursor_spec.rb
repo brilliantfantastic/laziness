@@ -24,7 +24,10 @@ describe Slack::Cursor do
         "ok" => true,
         "channels" => [{
           "id" => "C03"
-        }]
+        }],
+        "response_metadata" => {
+          "next_cursor" => ""
+        }
       }
     end
     let(:page) { { limit: 10 } }
