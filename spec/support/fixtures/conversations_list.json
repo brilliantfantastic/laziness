@@ -26,5 +26,8 @@
       },
       "num_members": 2
     }
-  ]
+  ],
+  "response_metadata": {
+    "next_cursor": "next"
+  }
 }

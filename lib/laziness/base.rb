@@ -3,8 +3,8 @@ require 'hashie'
 module Slack
   class Base < Hashie::Mash
     class << self
-      def parse(request, key=nil)
-        parsed = JSON.parse(request.body)
+      def parse(response, key=nil)
+        parsed = JSON.parse(response.body)
         parsed = parsed[key] if key && parsed[key]
         if parsed.is_a? Array
           models = []
@@ -13,6 +13,12 @@ module Slack
         else
           new parsed
         end
+      end
+
+      def parse_all(responses, key=nil)
+        responses.map do |response|
+          parse(response, key)
+        end.flatten
       end
     end
   end

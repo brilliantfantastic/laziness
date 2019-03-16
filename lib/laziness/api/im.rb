@@ -1,9 +1,12 @@
 module Slack
   module API
     class IM < Base
-      def all
-        response = request :get, 'im.list'
-        Slack::Channel.parse response, 'ims'
+      def all(page: nil)
+        responses = with_paging(page) do |pager|
+          request :get, 'im.list', **pager.to_h
+        end
+
+        Slack::Channel.parse_all responses, 'ims'
       end
 
       def close(channel)

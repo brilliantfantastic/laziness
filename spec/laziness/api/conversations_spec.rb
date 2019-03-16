@@ -13,6 +13,20 @@ describe Slack::API::Conversations do
       expect(conversations.length).to eq 1
       expect(conversations[0].id).to eq "C02BLAH"
     end
+
+    context 'with paging' do
+      it 'pages through until there are no more pages left' do
+        stub_slack_request :get,
+          "conversations.list?token=#{access_token}&exclude_archived=0&"\
+          "limit=1000&"\
+          "types=public_channel",
+          "conversations_list.json"
+
+        conversations = subject.all(page: { limit: 1000 })
+        expect(conversations.length).to eq 1
+        expect(conversations[0].id).to eq "C02BLAH"
+      end
+    end
   end
 
   describe '.archive' do

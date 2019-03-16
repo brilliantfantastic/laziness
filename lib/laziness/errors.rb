@@ -94,4 +94,23 @@ module Slack
       super "You cannot archive the last channel for a restricted account."
     end
   end
+
+  class TooManyRequestsError < APIError
+    def initialize(response)
+      @response = response
+    end
+
+    def message
+      "Retry after #{retry_after_in_seconds} seconds"
+    end
+
+    def retry_after_in_seconds
+      retry_after = response.headers["retry-after"]
+      (retry_after || 0).to_i
+    end
+
+    private
+
+    attr_reader :response
+  end
 end

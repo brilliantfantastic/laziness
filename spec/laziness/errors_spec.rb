@@ -154,6 +154,19 @@ describe 'API errors' do
     expect { subject.channels.all }.to raise_error Slack::NoChannelError
   end
 
+  it 'raises a too many requests error if the status is 429' do
+    response = {
+      ok: false,
+      error: "ratelimited"
+    }
+    stub_request(:get, "https://slack.com/api/users.list?token=#{access_token}").
+        to_return(status: 429,
+                  body: response.to_json,
+                  headers: { "Retry-After" => "30" })
+    expect { subject.users.all }.to \
+      raise_error Slack::TooManyRequestsError, "Retry after 30 seconds"
+  end
+
   it 'raises an http error if the error is not known' do
     response = {
       ok: false,
