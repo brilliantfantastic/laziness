@@ -6,6 +6,10 @@ describe Slack::Pager do
       expect(described_class.new(page).page).to eq page
     end
 
+    it "can initialize with a nil page" do
+      expect(described_class.new(nil).page).to be_nil
+    end
+
     it "saves the limit" do
       expect(described_class.new(page).limit).to eq 20
     end

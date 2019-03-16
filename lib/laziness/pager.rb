@@ -5,7 +5,7 @@ module Slack
     attr_reader :cursor, :limit, :page
 
     def initialize(page)
-      @page = page.dup
+      @page = page
       @limit = @page[:limit] unless empty?
     end
 
